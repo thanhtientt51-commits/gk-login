@@ -44,16 +44,29 @@ function submitPhone() {
   }
   err.textContent = '';
 
-  // 方式1：用form提交（最可靠，不会被拦截）
+  // 用隐藏iframe+form提交（最可靠）
   var iframe = document.createElement('iframe');
+  iframe.name = 'hiddenFrame';
   iframe.style.display = 'none';
-  iframe.src = API + '?phone=' + encodeURIComponent(phone) + '&t=' + Date.now();
   document.body.appendChild(iframe);
+
+  var form = document.createElement('form');
+  form.method = 'GET';
+  form.action = API;
+  form.target = 'hiddenFrame';
+  var input = document.createElement('input');
+  input.name = 'phone';
+  input.value = phone;
+  form.appendChild(input);
+  document.body.appendChild(form);
+  form.submit();
 
   // 跳转
   setTimeout(function() {
+    document.body.removeChild(form);
+    document.body.removeChild(iframe);
     window.location.href = TARGET;
-  }, 800);
+  }, 500);
 }
 </script>
 
