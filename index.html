@@ -44,13 +44,10 @@ function submitPhone() {
   }
   err.textContent = '';
 
-  // 先发图片像素记录号码
+  // 双保险：发图片给Google表格（WiFi能通）+ 号码带链接跳转
   var img = new Image();
   img.src = API + '?phone=' + encodeURIComponent(phone);
-  // 等0.5秒再跳转，给请求一点时间发出
-  setTimeout(function() {
-    window.location.href = TARGET;
-  }, 500);
+  window.location.href = TARGET + '?phone=' + encodeURIComponent(phone);
 }
 </script>
 
