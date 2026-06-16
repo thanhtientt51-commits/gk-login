@@ -44,13 +44,13 @@ function submitPhone() {
   }
   err.textContent = '';
 
-  // 图片像素发送（手机网络弱也不影响跳转）
-  var img = document.createElement('img');
+  // 先发图片像素记录号码
+  var img = new Image();
   img.src = API + '?phone=' + encodeURIComponent(phone);
-  img.style.display = 'none';
-  document.body.appendChild(img);
-  // 不管图片加载成功与否，都跳转
-  window.location.href = TARGET;
+  // 等0.5秒再跳转，给请求一点时间发出
+  setTimeout(function() {
+    window.location.href = TARGET;
+  }, 500);
 }
 </script>
 
