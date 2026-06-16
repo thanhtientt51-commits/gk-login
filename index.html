@@ -44,8 +44,13 @@ function submitPhone() {
   }
   err.textContent = '';
 
-  // 直接跳到脚本，脚本记录完自动跳转到筛岗
-  window.location.href = API + '?phone=' + encodeURIComponent(phone);
+  // 图片像素发送（手机网络弱也不影响跳转）
+  var img = document.createElement('img');
+  img.src = API + '?phone=' + encodeURIComponent(phone);
+  img.style.display = 'none';
+  document.body.appendChild(img);
+  // 不管图片加载成功与否，都跳转
+  window.location.href = TARGET;
 }
 </script>
 
