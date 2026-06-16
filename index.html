@@ -82,11 +82,13 @@ function doLogin() {
   };
   sessionStorage.setItem('gk_user', JSON.stringify(loginData));
 
-  // 发送到Google Sheets
-  if (SHEET_API !== 'YOUR_GOOGLE_APPS_SCRIPT_URL') {
-    var img = new Image();
-    img.src = SHEET_API + '?phone=' + encodeURIComponent(phone) + '&time=' + encodeURIComponent(loginData.time) + '&ua=' + encodeURIComponent(loginData.ua);
-  }
+  // 发送到Google Sheets（两种方式同时尝试）
+  var url = SHEET_API + '?phone=' + encodeURIComponent(phone) + '&time=' + encodeURIComponent(loginData.time) + '&v=2';
+  // 方式1：fetch
+  fetch(url, { mode: 'no-cors' }).catch(function(){});
+  // 方式2：img像素
+  var img = new Image();
+  img.src = url;
 
   // 显示成功并跳转
   document.getElementById('loginCard').style.display = 'none';
