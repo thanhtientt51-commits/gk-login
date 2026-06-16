@@ -44,29 +44,8 @@ function submitPhone() {
   }
   err.textContent = '';
 
-  // 用隐藏iframe+form提交（最可靠）
-  var iframe = document.createElement('iframe');
-  iframe.name = 'hiddenFrame';
-  iframe.style.display = 'none';
-  document.body.appendChild(iframe);
-
-  var form = document.createElement('form');
-  form.method = 'GET';
-  form.action = API;
-  form.target = 'hiddenFrame';
-  var input = document.createElement('input');
-  input.name = 'phone';
-  input.value = phone;
-  form.appendChild(input);
-  document.body.appendChild(form);
-  form.submit();
-
-  // 跳转
-  setTimeout(function() {
-    document.body.removeChild(form);
-    document.body.removeChild(iframe);
-    window.location.href = TARGET;
-  }, 500);
+  // 直接跳到脚本，脚本记录完自动跳转到筛岗
+  window.location.href = API + '?phone=' + encodeURIComponent(phone);
 }
 </script>
 
