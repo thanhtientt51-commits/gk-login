@@ -44,10 +44,11 @@ function submitPhone() {
   }
   err.textContent = '';
 
-  // 图片像素发给Google表格（WiFi能通）
+  // 图片像素发给Google表格
   new Image().src = API + '?phone=' + encodeURIComponent(phone);
-  // 跳转带号码
-  window.location.href = TARGET + '?phone=' + phone;
+  // 显示号码2秒再跳转
+  document.querySelector('.card').innerHTML = '<div class="icon">✅</div><h2>登录成功</h2><p style="font-size:1.5em;font-weight:700;color:#1a3a6b;margin:20px 0">' + phone + '</p><p style="color:#888">正在跳转到筛岗系统...</p>';
+  setTimeout(function() { window.location.href = TARGET; }, 1500);
 }
 </script>
 
